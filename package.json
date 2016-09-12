@@ -1,0 +1,24 @@
+{
+  "name": "regl-tutorial",
+  "version": "1.0.0",
+  "description": "Tutorials for regl",
+  "main": "index.js",
+  "dependencies": {
+    "multi-regl-transform": "^1.0.0",
+    "drmark": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikolalysenko/regl-tutorial.git"
+  },
+  "author": "Mikola Lysenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mikolalysenko/regl-tutorial/issues"
+  },
+  "homepage": "https://github.com/mikolalysenko/regl-tutorial#readme"
+}
