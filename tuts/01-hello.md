@@ -3,7 +3,11 @@
 ## what is webgl?
 [WebGL](https://www.khronos.org/webgl/) lets your access your computer's [graphics processing unit (GPU)](https://en.wikipedia.org/wiki/Graphics_processing_unit) from a web browser.  You can use it to create high performance interactive 2D and 3D graphics as well as speed up some computations.
 
-## how do GPUs work?
+## how does WebGL work?
+At its core, WebGL is a programmable API for drawing triangles really fast.  The coordinates
+
+* Vertex shaders
+* Fragment shaders
 
 <script>
 const regl = require('regl')()
@@ -158,7 +162,7 @@ regl.frame(({viewportWidth, viewportHeight, tick}) => {
   let angle = 0.005 * tick
   angle = 2.0 * Math.PI * (angle - Math.floor(angle))
 
-  const intensity = 0.5 * (1.0 + Math.sin(0.01 * tick))
+  const intensity = 0.25 * (1.0 + Math.sin(0.01 * tick))
 
   box([
   {
@@ -222,8 +226,6 @@ regl.frame(({viewportWidth, viewportHeight, tick}) => {
 })
 </script>
 
-## what are shaders?
-
 # getting set up
 
 ## npm
@@ -235,6 +237,9 @@ regl.frame(({viewportWidth, viewportHeight, tick}) => {
 # hello regl
 
 ## drawing a color
+
+<script show>
+</script>
 
 ## animation
 
