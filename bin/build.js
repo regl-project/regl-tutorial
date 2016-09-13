@@ -12,7 +12,11 @@ var transform = [
 ]
 
 var src = fs.readFileSync(process.argv[2], 'utf8')
-drmark(src, { transform: transform }, function (err, html) {
+drmark(src, {
+  transform: transform,
+  deferred: true,
+  target: '#container'
+}, function (err, html) {
   if (err) {
     console.error(err)
     return

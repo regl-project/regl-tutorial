@@ -203,10 +203,17 @@ body {
   padding: 0;
   vertical-align: middle;
   font-family: sans-serif;
+  background-color: #00ffff;
 }
 
 #container {
   text-align: left;
   margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 32px;
   max-width: 724px;
+  background-color: #fff0ff;
+  border: 2px;
+  border-style: solid;
 }
