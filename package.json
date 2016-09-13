@@ -13,6 +13,7 @@
     "gl-mat4": "^1.1.4",
     "glob": "^7.0.6",
     "globber": "^0.1.2",
+    "katex": "^0.6.0",
     "loop-subdivide": "^1.0.0",
     "multi-regl": "^1.0.0",
     "multi-regl-transform": "^1.2.0",
