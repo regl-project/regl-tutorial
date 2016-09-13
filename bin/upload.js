@@ -2,9 +2,14 @@ var NeoCities = require('neocities')
 var prompt = require('prompt')
 var glob = require('glob')
 var path = require('path')
-prompt.start({
-  password: {
-    hidden: true
+
+prompt.start()
+
+prompt.get({
+  properties: {
+    password: {
+      hidden: true
+    }
   }
 }, function (err, result) {
   if (err) {
@@ -12,11 +17,12 @@ prompt.start({
     return
   }
   var api = new NeoCities('regl', result.password)
-  glob('www/**', function (err, files) {
+  glob('www/**.*', function (err, files) {
     if (err) {
       console.error(err)
       return
     }
+    console.log('uploading:', files)
 
     api.upload(files.map(function (name) {
       return {
