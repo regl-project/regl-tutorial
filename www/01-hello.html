@@ -11,8 +11,8 @@
 <script>_drmarkCode={}</script>
 <h1 id="basics">basics</h1>
 <h2 id="what-is-webgl-">what is webgl?</h2>
-<p><a href="https://www.khronos.org/webgl/">WebGL</a> lets your access your computer&#39;s <a href="https://en.wikipedia.org/wiki/Graphics_processing_unit">graphics processing unit (GPU)</a> from a web browser.  You can use it to create high performance graphics, both in 2D and 3D</p>
-<h2 id="how-do-gpus-work-">how do GPUs work?</h2><div id="b1c2f9c9"></div>
+<p><a href="https://www.khronos.org/webgl/">WebGL</a> lets your access your computer&#39;s <a href="https://en.wikipedia.org/wiki/Graphics_processing_unit">graphics processing unit (GPU)</a> from a web browser.  You can use it to create high performance interactive 2D and 3D graphics as well as speed up some computations.</p>
+<h2 id="how-do-gpus-work-">how do GPUs work?</h2><div id="6d56142e"></div>
 
 <h2 id="what-are-shaders-">what are shaders?</h2>
 <h1 id="getting-set-up">getting set up</h1>
@@ -26,7 +26,7 @@
 
 <script>
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-_drmarkCode["b1c2f9c9"] = function () {
+_drmarkCode["6d56142e"] = function () {
   var regl = ((function () {if (typeof __MULTIREGL === "undefined") {
 __MULTIREGL = require("multi-regl")()
 __MULTIREGL_IX = 0
@@ -65,9 +65,9 @@ return __MULTIREGL(element)
   });
 
   var arrow = regl({
-    vert: '\n  precision mediump float;\n  uniform vec2 scale, translate;\n  attribute vec2 position;\n  void main () {\n    gl_Position = vec4(scale * position + translate, 0.5, 1);\n  }\n  ',
+    vert: '\n  precision mediump float;\n  uniform vec2 scale, translate;\n  attribute vec2 position;\n  varying float phase;\n  void main () {\n    phase = -position.x;\n    gl_Position = vec4(scale * position + translate, 0.5, 1);\n  }\n  ',
 
-    frag: '\n  precision mediump float;\n  uniform vec4 color;\n  void main () {\n    gl_FragColor = color;\n  }\n  ',
+    frag: '\n  precision mediump float;\n  uniform vec4 color;\n  uniform float time;\n  varying float phase;\n  void main () {\n    gl_FragColor = vec4(sqrt(\n      mix(color.xyz, vec3(0, 0, 0.5), (0.5 + 0.5 * cos(time + 12.0 * phase)))), 1.0);\n  }\n  ',
 
     attributes: {
       position: [[-1, -1], [-1, 1], [1, -1], [1, -1], [-1, 1], [1, 1], [1, 2], [1, -2], [2, 0]]
@@ -76,22 +76,48 @@ return __MULTIREGL(element)
     uniforms: {
       color: regl.prop('color'),
       translate: regl.prop('translate'),
-      scale: regl.prop('scale')
+      scale: regl.prop('scale'),
+      time: function ({ tick }) {
+        return 0.2 * tick;
+      }
     },
 
     count: 9
   });
 
   var drawPolygon = regl({
-    vert: '\n  precision mediump float;\n  uniform vec2 scale, offset;\n  uniform float angle;\n  attribute vec2 position;\n  attribute vec3 color;\n  void main () {\n    gl_Position = vec4(scale * vec2(\n      cos(angle) * position.x - sin(angle) * position.y,\n      sin(angle) * position.x + cos(angle) * position.y) + offset, 0, 1);\n  }\n  '
+    vert: '\n  precision mediump float;\n  uniform vec2 scale, offset;\n  uniform float angle;\n  attribute vec2 position;\n  attribute vec3 color;\n  varying vec3 fragColor;\n  void main () {\n    fragColor = color;\n    gl_Position = vec4(scale * vec2(\n      cos(angle) * position.x - sin(angle) * position.y,\n      sin(angle) * position.x + cos(angle) * position.y) + offset, 0, 1);\n    gl_PointSize = 8.0;\n  }\n  ',
+
+    frag: '\n  precision mediump float;\n  uniform float intensity;\n  varying vec3 fragColor;\n  void main () {\n    gl_FragColor = vec4(sqrt(fragColor + intensity), 1);\n  }\n  ',
+
+    attributes: {
+      color: [[1, 0, 0], [0, 1, 0], [0, 0, 1]],
+      position: [[1, 0], [0, 1], [-1, -1]]
+    },
+
+    uniforms: {
+      scale: regl.prop('scale'),
+      offset: regl.prop('translate'),
+      angle: regl.prop('angle'),
+      intensity: regl.prop('intensity')
+    },
+
+    count: 3,
+
+    primitive: regl.prop('primitive')
   });
 
-  regl.frame(function ({ viewportWidth, viewportHeight }) {
+  regl.frame(function ({ viewportWidth, viewportHeight, tick }) {
     regl.clear({
       depth: 1
     });
 
     var aspect = viewportWidth / viewportHeight;
+
+    var angle = 0.005 * tick;
+    angle = 2.0 * Math.PI * (angle - Math.floor(angle));
+
+    var intensity = 0.5 * (1.0 + Math.sin(0.01 * tick));
 
     box([{
       translate: [-0.8, 0],
@@ -107,17 +133,45 @@ return __MULTIREGL(element)
       color: [0.8, 0.8, 0.8, 1]
     }]);
 
-    arrow([{
-      translate: [-0.48, 0],
-      scale: [0.15, aspect * 0.05],
-      color: [1, 1, 1, 1]
+    drawPolygon([{
+      translate: [-0.8, 0],
+      angle: 0,
+      scale: [0.1, 0.1 * aspect],
+      primitive: 'points',
+      intensity: 0
     }, {
-      translate: [0.32, 0],
-      scale: [0.15, aspect * 0.05],
-      color: [1, 1, 1, 1]
+      translate: [0, 0],
+      angle,
+      scale: [0.1, 0.1 * aspect],
+      primitive: 'points',
+      intensity: 0
+    }, {
+      translate: [0, 0],
+      angle,
+      scale: [0.1, 0.1 * aspect],
+      primitive: 'line loop',
+      intensity: 0
+    }, {
+      translate: [0.8, 0],
+      angle,
+      scale: [0.1, 0.1 * aspect],
+      primitive: 'triangles',
+      intensity: intensity
     }]);
 
-    text('uniforms', [-0.125, 0.75], 0.05, [0, 0, 0, 1]);
+    arrow([{
+      translate: [-0.48, 0],
+      scale: [0.15, aspect * 0.03],
+      color: [1, 0, 1, 1]
+    }, {
+      translate: [0.32, 0],
+      scale: [0.15, aspect * 0.03],
+      color: [0, 1, 1, 1]
+    }]);
+
+    text('uniforms', [-0.1, 0.65], 0.05, [0, 0, 0, 1]);
+    text('{ angle: ' + angle.toFixed(4) + ',', [-0.3, 0.5], 0.05, [0, 0, 0, 1]);
+    text('intensity: ' + intensity.toFixed(4) + ' }', [0.01, 0.5], 0.05, [0, 0, 0, 1]);
     text('attributes', [-0.9, -0.9], 0.05, [0, 0, 0, 1]);
     text('vertex shader', [-0.6, -0.2 * aspect], 0.05, [0, 0, 0, 1]);
     text('varying variables', [-0.17, -0.9], 0.05, [0, 0, 0, 1]);
@@ -14955,12 +15009,10 @@ module.exports = function (regl) {
 },{"vectorize-text":8}]},{},[1]);
 
 ;(function(){var target = document.querySelector("#container")
-;["b1c2f9c9"].forEach(function(id){var dst = document.getElementById(id)
+;["6d56142e"].forEach(function(id){var dst = document.getElementById(id)
 var begin = target.childNodes.length
 _drmarkCode[id]()
 var end = target.childNodes.length
-console.log(begin,end)
-console.log(target.childNodes)
 for(var i=begin; target.childNodes[i];) {
 var c = target.childNodes[i]
 target.removeChild(c)
