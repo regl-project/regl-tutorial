@@ -4,12 +4,34 @@
   "description": "Tutorials for regl",
   "main": "index.js",
   "dependencies": {
-    "multi-regl-transform": "^1.0.0",
-    "drmark": "^1.0.1"
+    "angle-normals": "^1.0.0",
+    "cdt2d": "^1.0.0",
+    "clean-pslg": "^1.1.0",
+    "drmark": "^1.0.1",
+    "es2020": "^1.1.9",
+    "get-pixels": "^3.3.0",
+    "gl-mat4": "^1.1.4",
+    "glob": "^7.0.6",
+    "globber": "^0.1.2",
+    "loop-subdivide": "^1.0.0",
+    "multi-regl": "^1.0.0",
+    "multi-regl-transform": "^1.1.0",
+    "neocities": "0.0.3",
+    "prompt": "^1.0.0",
+    "refine-mesh": "^1.0.1",
+    "regl": "^1.2.1",
+    "simplicial-complex": "^1.0.0",
+    "simplicial-complex-boundary": "^1.0.1",
+    "simplify-planar-graph": "^2.0.1",
+    "surface-nets": "^1.0.2",
+    "uglifyify": "^3.0.3",
+    "vectorize-text": "^3.0.2"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "make",
+    "publish": "node ./bin/build.js"
   },
   "repository": {
     "type": "git",
