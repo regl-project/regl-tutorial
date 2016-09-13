@@ -2,10 +2,150 @@
 
 ## commands
 
-## shaders
+<script show>
+const regl = require('regl')()
 
-## vertex attributes
+const drawTriangle = regl({
+  vert: `
+  precision mediump float;
+  attribute vec2 position;
+  void main () {
+    gl_Position = vec4(position, 0, 1);
+  }
+  `,
 
-## varying variables
+  frag: `
+  void main () {
+    gl_FragColor = vec4(1, 1, 1, 1);
+  }
+  `,
 
-## uniforms
+  attributes: {
+    position: [
+      [1, 0],
+      [0, 1],
+      [-1, -1]
+    ]
+  },
+
+  count: 3
+})
+
+regl.frame(() => {
+  regl.clear({
+    color: [0, 0, 0, 1],
+    depth: 1
+  })
+
+  drawTriangle()
+})
+</script>
+
+## vertex attributes and varying variables
+
+<script show>
+const regl = require('regl')()
+
+const drawTriangle = regl({
+  vert: `
+  precision mediump float;
+  attribute vec2 position;
+  attribute vec3 color;
+  varying vec3 fcolor;
+  void main () {
+    fcolor = color;
+    gl_Position = vec4(position, 0, 1);
+  }
+  `,
+
+  frag: `
+  precision mediump float;
+  varying vec3 fcolor;
+  void main () {
+    gl_FragColor = vec4(sqrt(fcolor), 1);
+  }
+  `,
+
+  attributes: {
+    position: [
+      [1, 0],
+      [0, 1],
+      [-1, -1]
+    ],
+
+    color: [
+      [1, 0, 0],
+      [0, 1, 0],
+      [0, 0, 1]
+    ]
+  },
+
+  count: 3
+})
+
+regl.frame(() => {
+  regl.clear({
+    color: [0, 0, 0, 1],
+    depth: 1
+  })
+
+  drawTriangle()
+})
+</script>
+
+## uniforms and props
+
+<script show>
+const regl = require('regl')()
+
+const drawTriangle = regl({
+  vert: `
+  precision mediump float;
+  uniform float scale;
+  attribute vec2 position;
+  attribute vec3 color;
+  varying vec3 fcolor;
+  void main () {
+    fcolor = color;
+    gl_Position = vec4(scale * position, 0, 1);
+  }
+  `,
+
+  frag: `
+  precision mediump float;
+  varying vec3 fcolor;
+  void main () {
+    gl_FragColor = vec4(sqrt(fcolor), 1);
+  }
+  `,
+
+  attributes: {
+    position: [
+      [1, 0],
+      [0, 1],
+      [-1, -1]
+    ],
+
+    color: [
+      [1, 0, 0],
+      [0, 1, 0],
+      [0, 0, 1]
+    ]
+  },
+
+  uniforms: {
+    scale: 0.25
+  },
+
+  count: 3
+})
+
+regl.frame(() => {
+  regl.clear({
+    color: [0, 0, 0, 1],
+    depth: 1
+  })
+
+  drawTriangle()
+})
+</script>

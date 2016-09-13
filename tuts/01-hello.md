@@ -239,8 +239,29 @@ regl.frame(({viewportWidth, viewportHeight, tick}) => {
 ## drawing a color
 
 <script show>
+// First we import regl and call the constructor
+const regl = require('regl')()
+
+// Then we hook a callback to draw the current frame
+regl.frame(() => {
+  // And in the frame loop we clear the screen color to magenta
+  regl.clear({
+    color: [1, 0, 1, 1]
+  })
+})
 </script>
 
 ## animation
+
+<script show>
+const regl = require('regl')()
+
+regl.frame(({tick}) => {
+  // Instead of magenta, we oscillate the color
+  regl.clear({
+    color: [0.5 * (1.0 + Math.cos(tick * 0.01)), 0, 1, 1]
+  })
+})
+</script>
 
 # next
