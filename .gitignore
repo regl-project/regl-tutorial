@@ -11,9 +11,10 @@ pids
 logs
 results
 
-www/fonts
-www/katex.css
-
 npm-debug.log
 node_modules/*
 *.DS_Store
+www/*.html
+www/fonts
+www/katex.css
+
