@@ -10,7 +10,7 @@
     <div id="container" align="center">
 
 <script>(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-_drmark72b91f51 = function () {
+_drmark1d592672 = function () {
   var regl = ((function () {if (typeof __MULTIREGL === "undefined") {
 __MULTIREGL = require("multi-regl")()
 }
@@ -657,24 +657,49 @@ module.exports = function (regl) {
 };
 },{"./assets/logo3d.js":9,"gl-mat4/identity":2,"gl-mat4/lookAt":3,"gl-mat4/perspective":4,"gl-mat4/rotateX":5,"gl-mat4/rotateZ":6}]},{},[1]);
 
-</script><script>_drmark72b91f51()</script>
+</script><script>_drmark1d592672()</script>
 
 <h1 id="what-is-regl-">what is regl?</h1>
-<p><a href="https://github.com/regl-project/regl"><code>regl</code></a> is a light weight [WebGL wrapper focusing on stability, performance and maintainability.  It makes it to get started writing your own shaders and custom graphical effects with minimal overhead, and its thoroughly documented and tested API means that you can count on it to continue working years down the road.  Here are some things people have made using regl:</p>
+<p><a href="https://github.com/regl-project/regl"><code>regl</code></a> is a light weight WebGL wrapper focusing on stability, performance and maintainability.  It makes it to get started writing your own shaders and custom graphical effects with minimal overhead, and its thoroughly documented and tested API means that you can count on it to continue working years down the road.  Here are some things people have made using regl:</p>
 <ul>
 <li>TODO insert gallery</li>
 </ul>
 <h1 id="syllabus">syllabus</h1>
+<h2 id="introduction-to-regl">introduction to regl</h2>
 <ol>
-<li>hello regl</li>
-<li>drawing a triangle</li>
-<li>sprites and textures</li>
-<li>gpgpu</li>
-<li>using modules</li>
-<li>matrices and transformations</li>
-<li>normals and lighting</li>
+<li><a href="01-hello.html">hello regl</a></li>
+<li><a href="02-triangle.html">drawing a triangle</a></li>
+<li><a href="03-animation.html">animation</a></li>
+<li><a href="04-buffers.html">buffers and elements</a></li>
+<li><a href="05-textures.html">textures</a></li>
+<li><a href="06-framebuffers.html">framebuffers and gpgpu</a></li>
+<li><a href="07-state.html">the webgl state machine</a></li>
+<li><a href="08-extensions.html">extensions, profiling, etc.</a></li>
+<li><a href="09-modules.html">using modules</a></li>
+</ol>
+<h2 id="2d-graphics">2d graphics</h2>
+<ol>
+<li>2d transformations</li>
+<li>matrices</li>
+<li>colors and gamma</li>
+<li>alpha blending</li>
+<li>sprites, atlases and tiles</li>
+<li>feedback effects</li>
+<li>video</li>
+<li>text</li>
+</ol>
+<h2 id="3d-graphics">3d graphics</h2>
+<ol>
+<li>the depth buffer</li>
+<li>3d transformations</li>
+<li>perspective and homogeneous coordinates</li>
+<li>matrices</li>
+<li>normals and simple lighting</li>
+<li>environment mapping</li>
+<li>shadows</li>
+<li>advanced lighting</li>
 <li>wrangling assets</li>
-<li>materials</li>
+<li>texture mapping</li>
 </ol>
 <h1 id="more-information">more information</h1>
 <ul>
