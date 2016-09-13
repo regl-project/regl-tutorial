@@ -1,6 +1,8 @@
 # basics
 
 ## what is webgl?
+[WebGL](https://www.khronos.org/webgl/) is 
+
 
 ## how do GPUs work?
 

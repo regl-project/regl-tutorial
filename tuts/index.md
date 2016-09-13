@@ -2,7 +2,7 @@
 var regl = require('regl')()
 var style = regl.container.style
 style.width = '100%'
-style.height = '400px'
+style.height = '350px'
 require('./tuts/logo.js')(regl)
 </script>
 

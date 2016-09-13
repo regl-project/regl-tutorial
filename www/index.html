@@ -10,7 +10,7 @@
     <div id="container" align="center">
 
 <script>(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-_drmark1d592672 = function () {
+_drmark87ddbefb = function () {
   var regl = ((function () {if (typeof __MULTIREGL === "undefined") {
 __MULTIREGL = require("multi-regl")()
 }
@@ -23,7 +23,7 @@ return __MULTIREGL(div)
 })());
   var style = regl.container.style;
   style.width = '100%';
-  style.height = '400px';
+  style.height = '350px';
   require('./tuts/logo.js')(regl);
 };
 },{"./tuts/logo.js":10,"multi-regl":7}],2:[function(require,module,exports){
@@ -410,6 +410,10 @@ module.exports = function createMultiplexor (inputs) {
   }
 
   regl.frame(function (context) {
+    regl.clear({
+      color: [0, 0, 0, 0]
+    })
+
     var width = window.innerWidth
     var height = window.innerHeight
 
@@ -634,7 +638,7 @@ module.exports = function (regl) {
       },
       view: lookAt(view, [0, 0, -500], [0, 0, 0], [0, -1, 0]),
       model: function ({ tick }) {
-        return rotateZ(model, rotateX(model, identity(model), -Math.PI / 8.0 * (1.0 + Math.sin(0.5 * Math.PI * Math.pow(Math.sin(0.01 * tick), 3.0)))), Math.PI / 16.0 * (0.8 + Math.sin(0.01 * tick)));
+        return rotateZ(model, rotateX(model, identity(model), -Math.PI / 8.0 * (1.0 + Math.sin(0.5 * Math.PI * Math.pow(Math.sin(0.01 * tick), 3.0)))), Math.PI / 20.0 * (0.6 + Math.sin(0.01 * tick)));
       },
       lightDir: [0.2, -1, 0.2],
       'color[0]': regl.prop('color[0]'),
@@ -657,7 +661,7 @@ module.exports = function (regl) {
 };
 },{"./assets/logo3d.js":9,"gl-mat4/identity":2,"gl-mat4/lookAt":3,"gl-mat4/perspective":4,"gl-mat4/rotateX":5,"gl-mat4/rotateZ":6}]},{},[1]);
 
-</script><script>_drmark1d592672()</script>
+</script><script>_drmark87ddbefb()</script>
 
 <h1 id="what-is-regl-">what is regl?</h1>
 <p><a href="https://github.com/regl-project/regl"><code>regl</code></a> is a light weight WebGL wrapper focusing on stability, performance and maintainability.  It makes it to get started writing your own shaders and custom graphical effects with minimal overhead, and its thoroughly documented and tested API means that you can count on it to continue working years down the road.  Here are some things people have made using regl:</p>

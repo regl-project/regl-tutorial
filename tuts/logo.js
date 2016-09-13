@@ -58,7 +58,7 @@ module.exports = function (regl) {
             identity(model),
             -Math.PI / 8.0 * (1.0 + Math.sin(
               0.5 * Math.PI * Math.pow(Math.sin(0.01 * (tick)), 3.0)))),
-          Math.PI / 16.0 * (0.8 + Math.sin(0.01 * (tick)))),
+          Math.PI / 20.0 * (0.6 + Math.sin(0.01 * (tick)))),
       lightDir: [ 0.2, -1, 0.2 ],
       'color[0]': regl.prop('color[0]'),
       'color[1]': regl.prop('color[1]')
