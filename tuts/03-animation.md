@@ -1,12 +1,12 @@
 # animations in regl
 
-## dynamic properties
-
 ## context variables
 
-## properties
+## props
 
 ## `this`
+
+## functions
 
 ## batch mode
 

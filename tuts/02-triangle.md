@@ -93,7 +93,7 @@ regl.frame(() => {
 })
 </script>
 
-## uniforms and props
+## uniforms
 
 <script show>
 const regl = require('regl')()
