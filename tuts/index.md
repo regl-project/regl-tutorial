@@ -12,42 +12,19 @@ require('./tuts/logo.js')(regl)
 
 * TODO insert gallery
 
-# syllabus
+# curriculum
 
-## introduction to regl
 1. [hello regl](01-hello.html)
 1. [drawing a triangle](02-triangle.html)
-1. [animation](03-animation.html)
-1. [buffers and elements](04-buffers.html)
-1. [textures](05-textures.html)
-1. [framebuffers and gpgpu](06-framebuffers.html)
-1. [the webgl state machine](07-state.html)
-1. [extensions, profiling, etc.](08-extensions.html)
-1. [using modules](09-modules.html)
-
-## 2d graphics
-
-1. 2d transformations
-1. matrices
-1. colors and gamma
-1. alpha blending
-1. sprites, atlases and tiles
-1. feedback effects
-1. video
-1. text
-
-## 3d graphics
-
-1. the depth buffer
-1. 3d transformations
-1. perspective and homogeneous coordinates
-1. matrices
-1. normals and simple lighting
-1. environment mapping
-1. shadows
-1. advanced lighting
-1. wrangling assets
-1. texture mapping
+1. [props and animations](03-animation.html)
+1. [batch mode](04-batch.md)
+1. [scopes and context](05-batch.md)
+1. [buffers and elements](06-buffers.html)
+1. [textures](07-textures.html)
+1. [framebuffers and gpgpu](08-framebuffers.html)
+1. [the webgl state machine](09-state.html)
+1. [extensions, profiling, etc.](10-extensions.html)
+1. [using modules](11-modules.html)
 
 # more information
 
