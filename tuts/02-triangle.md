@@ -3,9 +3,9 @@
 ## commands
 
 <script show>
-const regl = require('regl')()
+var regl = require('regl')()
 
-const drawTriangle = regl({
+var drawTriangle = regl({
   vert: `
   precision mediump float;
   attribute vec2 position;
@@ -31,7 +31,7 @@ const drawTriangle = regl({
   count: 3
 })
 
-regl.frame(() => {
+regl.frame(function () {
   regl.clear({
     color: [0, 0, 0, 1],
     depth: 1
@@ -44,9 +44,9 @@ regl.frame(() => {
 ## vertex attributes and varying variables
 
 <script show>
-const regl = require('regl')()
+var regl = require('regl')()
 
-const drawTriangle = regl({
+var drawTriangle = regl({
   vert: `
   precision mediump float;
   attribute vec2 position;
@@ -83,7 +83,7 @@ const drawTriangle = regl({
   count: 3
 })
 
-regl.frame(() => {
+regl.frame(function () {
   regl.clear({
     color: [0, 0, 0, 1],
     depth: 1
@@ -96,9 +96,9 @@ regl.frame(() => {
 ## uniforms
 
 <script show>
-const regl = require('regl')()
+var regl = require('regl')()
 
-const drawTriangle = regl({
+var drawTriangle = regl({
   vert: `
   precision mediump float;
   uniform float scale;
@@ -140,7 +140,7 @@ const drawTriangle = regl({
   count: 3
 })
 
-regl.frame(() => {
+regl.frame(function () {
   regl.clear({
     color: [0, 0, 0, 1],
     depth: 1

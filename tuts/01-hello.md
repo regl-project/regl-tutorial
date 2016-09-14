@@ -10,13 +10,13 @@ At its core, WebGL is a programmable API for drawing triangles really fast.  The
 * Fragment shaders
 
 <script>
-const regl = require('regl')()
-const text = require('./tuts/text.js')(regl)
+var regl = require('regl')()
+var text = require('./tuts/text.js')(regl)
 
 regl.container.style.width = '100%'
 regl.container.style.height = '200px'
 
-const box = regl({
+var box = regl({
   vert: `
   precision mediump float;
   uniform vec2 scale, translate;
@@ -337,10 +337,10 @@ and budo will reload the page whenever a file changes.
 
 <script show>
 // First we import regl and call the constructor
-const regl = require('regl')()
+var regl = require('regl')()
 
 // Then we hook a callback to draw the current frame
-regl.frame(() => {
+regl.frame(function () {
   // And in the frame loop we clear the screen color to magenta
   regl.clear({
     color: [1, 0, 1, 1]
@@ -351,9 +351,11 @@ regl.frame(() => {
 ## animation
 
 <script show>
-const regl = require('regl')()
+var regl = require('regl')()
 
-regl.frame(({tick}) => {
+regl.frame(function (context) {
+  var tick = context.tick
+
   // Instead of magenta, we oscillate the color
   regl.clear({
     color: [0.5 * (1.0 + Math.cos(tick * 0.01)), 0, 1, 1]
