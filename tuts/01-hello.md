@@ -230,9 +230,62 @@ regl.frame(({viewportWidth, viewportHeight, tick}) => {
 
 ## npm
 
+The regl ecosystem is based around [npm](https://npmjs.com), a package manager
+for javascript. To use npm, you'll need to install
+[node.js](https://nodejs.org/).
+
+The distributions on [the nodejs website](https://nodejs.org/en/download/) come
+with nodejs and npm included.
+
+You may also prefer to follow [distribution-specific
+instructions](https://nodejs.org/en/download/package-manager/) for your platform.
+
 ## browserify
 
+Packages from npm come in many separate files and use the node.js module system
+to import and export dependencies.
+
+To make the node.js module system work in the browser, use
+[browserify](http://browserify.org) to compile all your dependencies into a
+payload of javascript that you can deliver in a single script tag.
+
+It's good to have a copy of the browserify around for building files for
+production. Install browserify by running:
+
+``` sh
+sudo npm install -g browserify
+```
+
+This will give you a `browserify` command you can invoke starting from a file,
+such as `main.js` and will create a bundle of all the files necessary to run
+your project, `bundle.js`:
+
+```
+browserify main.js > bundle.js
+```
+
 ## budo
+
+In development, it's nice to have a tool that will recompile your code every
+time you make a change to a file. You can use
+[budo](https://npmjs.com/package/budo) to incrementally recompile your code like
+so:
+
+```
+budo main.js --open
+```
+
+This command will compile your code using browserify, set up a local http
+server with your code in a basic html scaffold and open a web browser.
+
+Every time you change your code, you can reload the page. If you prefer budo to
+handle that for you, you can pass in `--live`:
+
+```
+budo main.js --open --live
+```
+
+and budo will reload the page whenever a file changes.
 
 # hello regl
 
