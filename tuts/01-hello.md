@@ -230,9 +230,106 @@ regl.frame(({viewportWidth, viewportHeight, tick}) => {
 
 ## npm
 
+The regl ecosystem is based around [npm](https://npmjs.com), a package manager
+for javascript. To use npm, you'll need to install
+[node.js](https://nodejs.org/).
+
+The distributions on [the nodejs website](https://nodejs.org/en/download/) come
+with nodejs and npm included.
+
+You may also prefer to follow [distribution-specific
+instructions](https://nodejs.org/en/download/package-manager/) for your platform.
+
+Once you have node.js and npm installed, in a new project directory do:
+
+```
+npm install regl
+```
+
+The node.js module system gives you a function `require()` that you can use to
+load packages. For example, to load the regl package, in your code you can do:
+
+```
+var regl = require('regl')
+```
+
+Whenever you `npm install` some package, you can `require()` it by its name in
+your code.
+
+To load other files in your project instead of packages, use a relative path
+beginning in `'./'` or `'../'`. For example:
+
+```
+var len = require('./len.js')
+```
+
+will assign the exports of the local file `len.js` into the variable `len`.
+
+The `require()` function returns whatever functionality a package saw fit to
+export. A package set exports by assigning to the variable `module.exports`. For
+example, in `len.js` we can export a function:
+
+``` js
+module.exports = function len (a, b, c) {
+  return Math.sqrt(a*a+b*b+c*c)
+}
+```
+
+You can export any kind of object, not only functions, but it's very common to
+export a function.
+
+Each file in the node module system has its own module scope so you don't have
+to worry about local variable declarations with `var` leaking out.
+
 ## browserify
 
+Packages from npm come in many separate files and use the node.js module system
+to import and export dependencies.
+
+To make the node.js module system work in the browser, use
+[browserify](http://browserify.org) to compile all your dependencies into a
+payload of javascript that you can deliver in a single script tag.
+
+It's good to have a copy of the browserify around for building files for
+production. Install browserify by running:
+
+``` sh
+sudo npm install -g browserify
+```
+
+This will give you a `browserify` command you can invoke starting from a file,
+such as `main.js` and will create a bundle of all the files necessary to run
+your project.
+
+Start by writing code that requires `regl` and other libs in `main.js` and then
+you can run browserify to produce  `bundle.js`:
+
+```
+browserify main.js > bundle.js
+```
+
 ## budo
+
+In development, it's nice to have a tool that will recompile your code every
+time you make a change to a file. You can use
+[budo](https://npmjs.com/package/budo) to incrementally recompile your code like
+so:
+
+```
+budo main.js --open
+```
+
+This command will compile your code using browserify, set up a local http
+server with your code in a basic html scaffold and open a web browser.
+
+Every time you change your code, you can reload the page. If you prefer budo to
+handle that for you, you can pass in `--live`:
+
+```
+budo main.js --open --live
+```
+
+and budo will reload the page whenever a file changes.
 
 # hello regl
 
