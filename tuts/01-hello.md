@@ -240,6 +240,47 @@ with nodejs and npm included.
 You may also prefer to follow [distribution-specific
 instructions](https://nodejs.org/en/download/package-manager/) for your platform.
 
+Once you have node.js and npm installed, in a new project directory do:
+
+```
+npm install regl
+```
+
+The node.js module system gives you a function `require()` that you can use to
+load packages. For example, to load the regl package, in your code you can do:
+
+```
+var regl = require('regl')
+```
+
+Whenever you `npm install` some package, you can `require()` it by its name in
+your code.
+
+To load other files in your project instead of packages, use a relative path
+beginning in `'./'` or `'../'`. For example:
+
+```
+var len = require('./len.js')
+```
+
+will assign the exports of the local file `len.js` into the variable `len`.
+
+The `require()` function returns whatever functionality a package saw fit to
+export. A package set exports by assigning to the variable `module.exports`. For
+example, in `len.js` we can export a function:
+
+``` js
+module.exports = function len (a, b, c) {
+  return Math.sqrt(a*a+b*b+c*c)
+}
+```
+
+You can export any kind of object, not only functions, but it's very common to
+export a function.
+
+Each file in the node module system has its own module scope so you don't have
+to worry about local variable declarations with `var` leaking out.
+
 ## browserify
 
 Packages from npm come in many separate files and use the node.js module system
@@ -258,7 +299,10 @@ sudo npm install -g browserify
 
 This will give you a `browserify` command you can invoke starting from a file,
 such as `main.js` and will create a bundle of all the files necessary to run
-your project, `bundle.js`:
+your project.
+
+Start by writing code that requires `regl` and other libs in `main.js` and then
+you can run browserify to produce  `bundle.js`:
 
 ```
 browserify main.js > bundle.js
