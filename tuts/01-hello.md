@@ -1,13 +1,26 @@
 # basics
+`regl` is a library for writing WebGL programs.
 
 ## what is webgl?
-[WebGL](https://www.khronos.org/webgl/) lets your access your computer's [graphics processing unit (GPU)](https://en.wikipedia.org/wiki/Graphics_processing_unit) from a web browser.  You can use it to create high performance interactive 2D and 3D graphics as well as speed up some computations.
+[WebGL](https://www.khronos.org/webgl/) lets your access your computer's [graphics processing unit (GPU)](https://en.wikipedia.org/wiki/Graphics_processing_unit) from a web browser.
 
 ## how does WebGL work?
-At its core, WebGL is a programmable API for drawing triangles really fast.  The coordinates
+At its core, WebGL is an [API](https://en.wikipedia.org/wiki/Application_programming_interface) for drawing triangles really fast.  With the right set up, this can be used to create 3D scenes, fast and detailed animations or perform massive parallel computations.
 
-* Vertex shaders
-* Fragment shaders
+Before getting too far into the details, let's start take a high level look at how WebGL works.
+
+WebGL is programmed using [shaders](https://en.wikipedia.org/wiki/Shader), which are programs written in [GLSL](https://www.opengl.org/documentation/glsl/) that run on the GPU.  There are two kinds of shaders:
+
+* [Vertex shaders](https://www.opengl.org/wiki/Vertex_Shader), which determine where the triangles are drawn.
+* [Fragment shaders](https://www.opengl.org/wiki/Fragment_Shader), which determine the color of pixels on each triangle.
+
+Shaders receive information from 3 different types of variables:
+
+* [Attributes](https://www.opengl.org/wiki/Vertex_Shader#Inputs) are user defined inputs sent to vertex shader.  They are stored in arrays on the GPU.
+* [Varyings](https://www.opengl.org/sdk/docs/tutorials/ClockworkCoders/varying.php) are output from the vertex shader and interpolated across rendered primitives for each triangle
+* [Uniforms](https://www.opengl.org/wiki/Uniform_(GLSL)) are global variables which are broadcast to all shaders.
+
+Vertex shaders receive inputs from attributes and output varying data to fragment shaders.  Fragment shaders take in the interpolated varying variables and output pixel colors.
 
 <script>
 var regl = require('regl')()
@@ -334,6 +347,7 @@ and budo will reload the page whenever a file changes.
 # hello regl
 
 ## drawing a color
+Now that you have regl set up, let's jump in and create a simple application.  For this first example, we're going to make a program that just clears the screen to a solid color.  Copy and paste the following code into an example file and try running it:
 
 <script show>
 // First we import regl and call the constructor
@@ -343,24 +357,29 @@ var regl = require('regl')()
 regl.frame(function () {
   // And in the frame loop we clear the screen color to magenta
   regl.clear({
+    // This line determines the color of the screen.  It has 4 components:
+    //  [red, green, blue, alpha]
+    //
+    // Each of these is a number between 0 and 1, where 0 = dark and 1 = light.
+    // alpha is a special color controlling transparency.
+    //
     color: [1, 0, 1, 1]
+    //
+    // Try changing these numbers in your program and see what happens!
   })
 })
 </script>
 
 ## animation
+`regl.frame` is a [callback](https://en.wikipedia.org/wiki/Callback_%28computer_programming%29#JavaScript) method that takes a function which is executed each frame
 
 <script show>
 var regl = require('regl')()
 
-regl.frame(function (context) {
-  var tick = context.tick
-
+regl.frame(function () {
   // Instead of magenta, we oscillate the color
   regl.clear({
-    color: [0.5 * (1.0 + Math.cos(tick * 0.01)), 0, 1, 1]
+    color: [0, 0.5 * (1.0 + Math.cos(Date.now() * 0.01)), 1, 1]
   })
 })
 </script>
-
-# next
