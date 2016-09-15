@@ -1,4 +1,4 @@
-# [regl-tutorial](https://regl.neocities.com)
+# [regl-tutorial](https://regl.neocities.org)
 Tutorials for regl. (WORK IN PROGRESS)
 
 Available at https://regl.neocities.com
