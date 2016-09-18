@@ -16,6 +16,7 @@ var texre = /(<script[^>]*>.*?<\/script[^>]*>)|\$([^$]+)\$/ig
 var src = fs.readFileSync(process.argv[2], 'utf8')
   .replace(texre, function (_, a, b) { return a || katex(b) })
 drmark(src, {
+  debug: true,
   transform: transform,
   deferred: true,
   target: '#container'

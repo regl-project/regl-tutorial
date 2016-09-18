@@ -344,9 +344,38 @@ budo main.js --open --live
 
 and budo will reload the page whenever a file changes.
 
+### aside: ES6
+
+*This section is optional*
+
+[ECMAScript version 6](http://es6-features.org/) (also known as ES6) is a new version of JavaScript which is currently being rolled out.  It adds many nice features like [template strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) which make writing shader code much easier.
+
+Modern browsers like [Google Chrome](https://www.google.com/chrome/index.html) and [Firefox](https://www.mozilla.org/en-US/firefox/new/) already support most of the new language features, but many older browsers like iOS Safari do not yet.
+
+If you want to use ES6 features when you are writing your regl, it is a good idea to transpile your JavaScript down to ES5 so that users with legacy browsers can still see your creation.
+
+A simple way to do this is with the [es2020 browserify transform](https://github.com/yoshuawuyts/es2020) that implements a subset of ES6 features.  To install it with npm type:
+
+```
+npm install es2020
+```
+
+And then to use the transform with browserify run:
+
+```
+browserify -t es2020 main.js > bundle.js
+```
+
+Or in budo:
+
+```
+budo main.js --open --live -- -t es2020
+```
+
 # hello regl
 
 ## drawing a color
+
 Now that you have regl set up, let's jump in and create a simple application.  For this first example, we're going to make a program that just clears the screen to a solid color.  Copy and paste the following code into an example file and try running it:
 
 <script show>
