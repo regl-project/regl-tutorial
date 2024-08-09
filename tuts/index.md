@@ -28,7 +28,7 @@ require('./tuts/logo.js')(regl)
 
 # more information
 
-* [Official website](https://regl.party)
+* [Official website](https://regl-project.github.io)
 * [GitHub](https://github.com/regl-project/regl)
 * [API Docs](https://github.com/regl-project/regl/blob/gh-pages/API.md)
 * [Chat](https://gitter.im/mikolalysenko/regl)
